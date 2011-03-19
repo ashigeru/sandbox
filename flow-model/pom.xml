@@ -6,9 +6,9 @@
     <artifactId>flow-model</artifactId>
     <name>Data/Control Flow Model</name>
     <packaging>jar</packaging>
-    <groupId>com.ashigeru.compiler</groupId>
+    <groupId>com.ashigeru.sandbox</groupId>
     <parent>
-        <groupId>com.ashigeru.compiler</groupId>
+        <groupId>com.ashigeru.sandbox</groupId>
         <artifactId>parent</artifactId>
         <version>0.1.0-SNAPSHOT</version>
         <relativePath>../parent</relativePath>

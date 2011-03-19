@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>parent</artifactId>
-    <name>Compiler Toolkit Parent Project</name>
+    <name>Sandbox Parent Project</name>
     <packaging>pom</packaging>
-    <groupId>com.ashigeru.compiler</groupId>
+    <groupId>com.ashigeru.sandbox</groupId>
     <version>0.1.0-SNAPSHOT</version>
 
-    <url>https://github.com/ashigeru/compiler-toolkit</url>
+    <url>https://github.com/ashigeru/sandbox</url>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
