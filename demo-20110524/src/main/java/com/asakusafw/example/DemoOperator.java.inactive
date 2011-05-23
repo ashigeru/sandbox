@@ -1,0 +1,34 @@
+package com.asakusafw.example;
+
+import com.asakusafw.example.modelgen.table.model.DemoItem;
+import com.asakusafw.example.modelgen.table.model.DemoOrder;
+import com.asakusafw.vocabulary.model.Key;
+import com.asakusafw.vocabulary.operator.MasterCheck;
+import com.asakusafw.vocabulary.operator.Update;
+
+/**
+ * デモ用の演算子クラス。
+ */
+public abstract class DemoOperator {
+
+    /**
+     * ステータスを設定にする。
+     * @param order 対象のモデル
+     * @param status 設定する文字列
+     */
+    @Update
+    public void setStatus(DemoOrder order, String status) {
+        order.setStatusAsString(status);
+    }
+
+    /**
+     * 注文に対応する商品があるか調べる。
+     * @param item 商品
+     * @param order 注文
+     * @return あればtrue
+     */
+    @MasterCheck
+    public abstract boolean checkItem(
+            @Key(group = "ITEM_ID") DemoItem item,
+            @Key(group = "ITEM_ID") DemoOrder order);
+}

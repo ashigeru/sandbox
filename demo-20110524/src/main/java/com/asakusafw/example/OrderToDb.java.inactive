@@ -1,0 +1,20 @@
+package com.asakusafw.example;
+
+import com.asakusafw.example.modelgen.table.model.DemoOrder;
+import com.asakusafw.vocabulary.bulkloader.DbExporterDescription;
+
+/**
+ * DEMO_ORDERにデータを書き戻す。
+ */
+public class OrderToDb extends DbExporterDescription {
+
+    @Override
+    public Class<?> getModelType() {
+        return DemoOrder.class;
+    }
+
+    @Override
+    public String getTargetName() {
+        return "asakusa";
+    }
+}

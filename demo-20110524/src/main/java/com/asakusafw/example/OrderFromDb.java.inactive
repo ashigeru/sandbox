@@ -1,0 +1,25 @@
+package com.asakusafw.example;
+
+import com.asakusafw.example.modelgen.table.model.DemoOrder;
+import com.asakusafw.vocabulary.bulkloader.DbImporterDescription;
+
+/**
+ * DEMO_ORDERからデータを取り出す。
+ */
+public class OrderFromDb extends DbImporterDescription {
+
+    @Override
+    public Class<?> getModelType() {
+        return DemoOrder.class;
+    }
+
+    @Override
+    public String getTargetName() {
+        return "asakusa"; // データベース情報
+    }
+
+    @Override
+    public LockType getLockType() {
+        return LockType.UNUSED; // ロック無し
+    }
+}

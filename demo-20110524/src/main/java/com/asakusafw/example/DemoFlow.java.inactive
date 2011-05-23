@@ -1,0 +1,53 @@
+package com.asakusafw.example;
+
+import com.asakusafw.example.DemoOperatorFactory.CheckItem;
+import com.asakusafw.example.DemoOperatorFactory.SetStatus;
+import com.asakusafw.example.modelgen.table.model.DemoItem;
+import com.asakusafw.example.modelgen.table.model.DemoOrder;
+import com.asakusafw.vocabulary.flow.Export;
+import com.asakusafw.vocabulary.flow.FlowDescription;
+import com.asakusafw.vocabulary.flow.Import;
+import com.asakusafw.vocabulary.flow.In;
+import com.asakusafw.vocabulary.flow.JobFlow;
+import com.asakusafw.vocabulary.flow.Out;
+
+/**
+ * デモ用のデータフロー。
+ */
+@JobFlow(name = "flow")
+public class DemoFlow extends FlowDescription {
+
+    private final In<DemoOrder> in;
+
+    private final In<DemoItem> item;
+
+    private final Out<DemoOrder> out;
+
+    /**
+     * 入出力の定義。
+     * @param in 入力order
+     * @param item 入力item
+     * @param out 出力order
+         */
+    public DemoFlow(
+            @Import(name = "order", description = OrderFromDb.class)
+            In<DemoOrder> in,
+            @Import(name = "item", description = ItemFromDb.class)
+            In<DemoItem> item,
+            @Export(name = "order", description = OrderToDb.class)
+            Out<DemoOrder> out) {
+        this.in = in;
+        this.item = item;
+        this.out = out;
+    }
+
+    @Override
+    protected void describe() {
+        DemoOperatorFactory f = new DemoOperatorFactory();
+        CheckItem checkItem = f.checkItem(item, in);
+        SetStatus ok = f.setStatus(checkItem.found, "OK");
+        SetStatus err = f.setStatus(checkItem.missed, "ERR");
+        out.add(ok.out);
+        out.add(err.out);
+    }
+}
